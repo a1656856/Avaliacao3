@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -27,12 +28,12 @@ public class ProcessaLancamentos {
         caminho = new BufferedReader(new FileReader(path));
     }
 
-    public String getNextLine() throws IOException {
+    private String getNextLine() throws IOException {
         String linha = caminho.readLine();
         return linha;
     }
 
-    public Lancamento processaLinha(String linha) {
+    private Lancamento processaLinha(String linha) {
         Integer conta;
         int ano, mes, dia;
         
@@ -47,11 +48,11 @@ public class ProcessaLancamentos {
         dia = Integer.parseInt(linha.substring(12, 14));
         
         
-        GregorianCalendar data = new GregorianCalendar( ano, mes-1, dia);
+        Date data = new Date(ano, mes-1, dia);
    
         descricao = linha.substring(14, 74);
-        valor = (Double.parseDouble(linha.substring(74)) / 100);
-        Lancamento lanc = new Lancamento(conta, data.getTime(), descricao, valor);
+        valor = (Double.parseDouble(linha.substring(74)) / 10);
+        Lancamento lanc = new Lancamento(conta, data, descricao, valor);
         return lanc;
     }
 
