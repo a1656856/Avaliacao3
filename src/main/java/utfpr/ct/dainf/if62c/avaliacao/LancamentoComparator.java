@@ -7,39 +7,28 @@ import java.util.Comparator;
  *
  * @author
  */
-public class LancamentoComparator<T extends Lancamento> implements Comparator {
+public class LancamentoComparator implements Comparator<Lancamento> {
 
-    
-    
-      
-    
-    
-    public int compare(T o1, T o2) {
+    @Override
+    public int compare(Lancamento o1, Lancamento o2) {
         
-          
-        if (o1.getConta() < o2.getConta()) {
-            return -1;
+        int i= 0;
+        
+        if (o1.getConta() == o2.getConta()) {
+                
             
+            if (o1.getData().getTime() > o2.getData().getTime()) {
+                i = 0;
+            } else if (o1.getData().getTime() == o2.getData().getTime()) {
+                i = 1;
+            } else {
+                i = -1;
+            }
         } else if (o1.getConta() > o2.getConta()) {
-            return 1;
-            
-        } else if (o1.getData().before(o2.getData())) {
-            return -1;
-            
-        } else if (o1.getData().after(o2.getData())) {
-            return 1;
-            
+            i = 1;
         } else {
-            return 0;
+            i = -1;
         }
+        return i;
     }
-    
-      @Override
-    public int compare(Object o1 , Object o2){
-        
-        
-        return 0;
-        
-    }
-
 }

@@ -7,7 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -27,12 +27,12 @@ public class ProcessaLancamentos {
         caminho = new BufferedReader(new FileReader(path));
     }
 
-    private String getNextLine() throws IOException {
+    public String getNextLine() throws IOException {
         String linha = caminho.readLine();
         return linha;
     }
 
-    private Lancamento processaLinha(String linha) {
+    public Lancamento processaLinha(String linha) {
         Integer conta;
         int ano, mes, dia;
         
@@ -41,17 +41,17 @@ public class ProcessaLancamentos {
         String descricao;
         Double valor;
         
-        conta = Integer.valueOf(linha.substring(0, 5));
-        ano = Integer.parseInt(linha.substring(6, 9));
-        mes = Integer.parseInt(linha.substring(10, 11));
-        dia = Integer.parseInt(linha.substring(12, 13));
+        conta = Integer.valueOf(linha.substring(0, 6));
+        ano = Integer.parseInt(linha.substring(6, 10));
+        mes = Integer.parseInt(linha.substring(10, 12));
+        dia = Integer.parseInt(linha.substring(12, 14));
         
         
-        Date data = new Date(mes-1,dia,ano);
+        GregorianCalendar data = new GregorianCalendar( ano, mes-1, dia);
    
-        descricao = linha.substring(14, 73);
+        descricao = linha.substring(14, 74);
         valor = (Double.parseDouble(linha.substring(74)) / 100);
-        Lancamento lanc = new Lancamento(conta, data, descricao, valor);
+        Lancamento lanc = new Lancamento(conta, data.getTime(), descricao, valor);
         return lanc;
     }
 
