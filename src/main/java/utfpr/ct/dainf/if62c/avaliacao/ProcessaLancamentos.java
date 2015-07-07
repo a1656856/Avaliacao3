@@ -51,7 +51,7 @@ public class ProcessaLancamentos {
         Date data = new Date(ano, mes-1, dia);
    
         descricao = linha.substring(14, 74);
-        valor = (Double.parseDouble(linha.substring(74)) / 10);
+        valor = (Double.parseDouble(linha.substring(74)) / 100);
         Lancamento lanc = new Lancamento(conta, data, descricao, valor);
         return lanc;
     }
